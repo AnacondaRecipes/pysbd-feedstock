@@ -10,16 +10,18 @@ source:
   sha256: cfdea5f33b79aba8cc82a3495cf57be582a1c36fa2cacc96d9bfd6ed8b213f2b
 
 build:
-  noarch: python
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
+  skip: true  # [py<36]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
+    - setuptools
+    - wheel
   run:
-    - python >=3.6
+    - python
 
 test:
   imports:
@@ -31,9 +33,14 @@ test:
 
 about:
   home: https://github.com/nipunsadvilkar/pySBD
+  dev_url: https://github.com/nipunsadvilkar/pySBD
+  doc_url: https://github.com/nipunsadvilkar/pySBD
   license: MIT
+  license_family: MIT
   license_file: LICENSE
   summary: Rule-based sentence boundary detection
+  description: |
+    pySBD - python Sentence Boundary Disambiguation (SBD) - is a rule-based sentence boundary detection module that works out-of-the-box.
 
 extra:
   recipe-maintainers:
